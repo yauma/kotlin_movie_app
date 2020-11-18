@@ -1,4 +1,4 @@
-package com.example.jaimequeraltgarrigos.kotlinmovieapp.network
+package com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

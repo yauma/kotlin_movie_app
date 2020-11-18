@@ -1,11 +1,13 @@
 package com.example.jaimequeraltgarrigos.kotlinmovieapp.di
 
 import android.app.Application
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.database.MovieDatabase
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.database.getDatabase
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.network.MainNetwork
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.network.getNetworkService
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepository
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database.MovieDBDataSource
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database.MovieDatabase
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database.getDatabase
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.MainNetwork
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.MovieNetworkDataSource
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.getNetworkService
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepositoryImpl
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.utils.mapper.DBEntityMapperImpl
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.utils.mapper.NetworkEntityMapperImpl
 import dagger.Module
@@ -28,9 +30,25 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun movieRepositoryProvider(
-        network: MainNetwork, db: MovieDatabase, networkEntityMapper: NetworkEntityMapperImpl,
+    fun movieNetworkDataSourceProvider(
+        mainNetwork: MainNetwork,
+        networkEntityMapper: NetworkEntityMapperImpl
+    ): MovieNetworkDataSource =
+        MovieNetworkDataSource(mainNetwork, networkEntityMapper)
+
+    @Provides
+    @Singleton
+    fun movieDBDataSourceProvider(
+        movieDatabase: MovieDatabase,
         dbEntityMapper: DBEntityMapperImpl
+    ): MovieDBDataSource =
+        MovieDBDataSource(movieDatabase.movieDao, dbEntityMapper)
+
+    @Provides
+    @Singleton
+    fun movieRepositoryProvider(
+        networkDataSource: MovieNetworkDataSource,
+        dbDataSource: MovieDBDataSource
     ) =
-        MovieRepository(network, db.movieDao, networkEntityMapper, dbEntityMapper)
+        MovieRepositoryImpl(networkDataSource, dbDataSource)
 }

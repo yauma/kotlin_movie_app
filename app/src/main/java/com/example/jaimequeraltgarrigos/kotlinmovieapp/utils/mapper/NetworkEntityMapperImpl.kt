@@ -1,8 +1,8 @@
 package com.example.jaimequeraltgarrigos.kotlinmovieapp.utils.mapper
 
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.database.Movie
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database.Movie
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.model.MovieEntity
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.network.MovieNetworkEntity
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.MovieNetworkEntity
 import javax.inject.Inject
 
 class NetworkEntityMapperImpl @Inject constructor() :

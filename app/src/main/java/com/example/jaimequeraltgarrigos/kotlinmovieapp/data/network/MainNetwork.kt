@@ -1,7 +1,6 @@
-package com.example.jaimequeraltgarrigos.kotlinmovieapp.network
+package com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network
 
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.utils.SkipNetworkInterceptor
-import kotlinx.coroutines.flow.Flow
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
