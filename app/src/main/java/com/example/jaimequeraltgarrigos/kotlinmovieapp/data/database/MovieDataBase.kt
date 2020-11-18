@@ -1,4 +1,4 @@
-package com.example.jaimequeraltgarrigos.kotlinmovieapp.database
+package com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database
 
 import android.content.Context
 import androidx.room.Database

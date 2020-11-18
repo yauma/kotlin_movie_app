@@ -3,8 +3,9 @@ package com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.main
 import androidx.lifecycle.SavedStateHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.getOrAwaitValue
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepository
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepositoryImpl
 import junit.framework.TestCase
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -16,12 +17,12 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 @RunWith(AndroidJUnit4::class)
-class MainViewModelTest : TestCase(){
+class MainViewModelTest : TestCase() {
     // Subject under test
     private lateinit var viewModel: MainViewModel
 
     @Mock
-    private lateinit var repository: MovieRepository
+    private lateinit var repositoryImpl: MovieRepositoryImpl
 
     @Mock
     private lateinit var handle: SavedStateHandle
@@ -29,11 +30,12 @@ class MainViewModelTest : TestCase(){
     @Before
     fun setupViewModel() {
         MockitoAnnotations.openMocks(this)
-        viewModel = MainViewModel(repository, handle)
+        repositoryImpl
+        viewModel = MainViewModel(repositoryImpl, handle)
     }
 
     @Test
-    fun spinner_value_should_be_false_at_the_beginning(){
+    fun spinner_value_should_be_false_at_the_beginning() {
         //When
         val value = viewModel.spinner.getOrAwaitValue()
 
@@ -42,7 +44,7 @@ class MainViewModelTest : TestCase(){
     }
 
     @Test
-    fun whenOnSnackbarShownCalled_thenValueShouldBeNull(){
+    fun whenOnSnackbarShownCalled_thenValueShouldBeNull() {
         //When
         viewModel.onSnackbarShown()
 
@@ -50,5 +52,4 @@ class MainViewModelTest : TestCase(){
         val value = viewModel.snackbar.getOrAwaitValue()
         assertEquals(value, null)
     }
-
 }

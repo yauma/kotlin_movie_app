@@ -1,13 +1,13 @@
 package com.example.jaimequeraltgarrigos.kotlinmovieapp.utils
 
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.network.MovieNetworkEntity
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.MovieNetworkEntity
 import com.google.gson.Gson
 import okhttp3.*
 
 /**
  * A list of fake results to return.
  */
-private val FAKE_RESULTS = listOf(
+val FAKE_RESULTS = listOf(
     MovieNetworkEntity("Suicide Squad", "/86L8wqGMDbwURPni2t7FQ0nDjsH.jpg", 1),
     MovieNetworkEntity("Jason Bourne", "/4lWr2j3ZSEe8qlt3W3ma8TiiMQB.jpg", 2),
     MovieNetworkEntity("Now You See Me 2", "/wu1uilmhM4TdluKi2ytfz8gidHf.jpg", 3),

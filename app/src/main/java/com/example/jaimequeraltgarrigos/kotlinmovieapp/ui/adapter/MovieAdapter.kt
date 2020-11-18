@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.R
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.model.MovieEntity
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.network.BASE_IMAGE_URL
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.cardview_movies.view.*
 
 class MovieAdapter : ListAdapter<MovieEntity, RecyclerView.ViewHolder>(MovieDiffCallback()) {

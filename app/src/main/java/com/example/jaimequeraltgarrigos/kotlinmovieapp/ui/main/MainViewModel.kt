@@ -3,13 +3,13 @@ package com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.main
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepository
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MovieRepositoryImpl
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.repository.MoviesRefreshError
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
-    private val repository: MovieRepository,
+    private val repositoryImpl: MovieRepositoryImpl,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _snackBar = MutableLiveData<String?>()
@@ -17,7 +17,7 @@ class MainViewModel @ViewModelInject constructor(
     val snackbar: LiveData<String?>
         get() = _snackBar
 
-    val movies = repository.movies
+    val movies = repositoryImpl.movies
 
     private val _spinner = MutableLiveData<Boolean>(false)
 
@@ -40,7 +40,7 @@ class MainViewModel @ViewModelInject constructor(
      */
     private fun refreshMovies() {
         launchDataLoad {
-            repository.refreshMovies()
+            repositoryImpl.refreshMovies()
         }
     }
 

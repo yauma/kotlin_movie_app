@@ -1,4 +1,4 @@
-package com.example.jaimequeraltgarrigos.kotlinmovieapp.database
+package com.example.jaimequeraltgarrigos.kotlinmovieapp.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
