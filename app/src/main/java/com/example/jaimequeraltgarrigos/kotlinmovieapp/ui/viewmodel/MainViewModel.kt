@@ -1,4 +1,4 @@
-package com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.main
+package com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.viewmodel
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject

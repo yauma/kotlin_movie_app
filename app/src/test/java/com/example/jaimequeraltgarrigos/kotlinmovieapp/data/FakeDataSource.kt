@@ -37,3 +37,37 @@ class FakeDataCompletableSource : FakeDataSource() {
 
     override suspend fun getMovies(): List<MovieEntity> = completable.await()
 }
+
+/**
+ * Testing Fake for MainNetwork that lets you complete or error all current requests
+ */
+class MainNetworkCompletableFake() : DataSource<MovieEntity> {
+    private var completable = CompletableDeferred<List<MovieEntity>>()
+
+    fun sendCompletionToAllCurrentRequests(result: List<MovieEntity>) {
+        completable.complete(result)
+        completable = CompletableDeferred()
+    }
+
+    fun sendErrorToCurrentRequests(throwable: Throwable) {
+        completable.completeExceptionally(throwable)
+        completable = CompletableDeferred()
+    }
+
+    override fun observeMovies(): LiveData<List<MovieEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMovies(): List<MovieEntity> {
+        return completable.await()
+    }
+
+    override suspend fun insertAll(list: List<MovieEntity>) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertMovie(movie: MovieEntity) {
+        TODO("Not yet implemented")
+    }
+
+}

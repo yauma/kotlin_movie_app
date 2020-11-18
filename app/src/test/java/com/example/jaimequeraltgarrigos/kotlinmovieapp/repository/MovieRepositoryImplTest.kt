@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.DataSource
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.FakeDataCompletableSource
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.FakeDataSource
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.data.network.MovieNetworkEntity
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.getOrAwaitValue
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.model.MovieEntity
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.utils.FAKE_RESULTS
@@ -24,7 +25,7 @@ class MovieRepositoryImplTest {
     private lateinit var movieDBDataSource: DataSource<MovieEntity>
     private lateinit var networkEntityMapperImpl: NetworkEntityMapperImpl
 
-    private lateinit var moviesNetwork: List<MovieEntity>
+    private lateinit var moviesNetwork: MutableList<MovieEntity>
 
     //class under test
     private lateinit var movieRepositoryImpl: MovieRepositoryImpl
@@ -32,11 +33,9 @@ class MovieRepositoryImplTest {
     @Before
     fun setup() {
         networkEntityMapperImpl = NetworkEntityMapperImpl()
-        moviesNetwork = FAKE_RESULTS.map {
-            networkEntityMapperImpl.entityToModel(it)
-        }
-        networkDataSource = FakeDataSource(moviesNetwork.toMutableList())
-        movieDBDataSource = FakeDataSource(moviesNetwork.toMutableList())
+        moviesNetwork = getMoviesNetwork(networkEntityMapperImpl)
+        networkDataSource = FakeDataSource(moviesNetwork)
+        movieDBDataSource = FakeDataSource(moviesNetwork)
         movieRepositoryImpl = MovieRepositoryImpl(networkDataSource, movieDBDataSource)
     }
 
@@ -62,4 +61,10 @@ class MovieRepositoryImplTest {
         advanceTimeBy(5_000)
     }
 
+}
+
+fun getMoviesNetwork(networkEntityMapperImpl: NetworkEntityMapperImpl): MutableList<MovieEntity> {
+    return FAKE_RESULTS.map {
+        networkEntityMapperImpl.entityToModel(it)
+    }.toMutableList()
 }

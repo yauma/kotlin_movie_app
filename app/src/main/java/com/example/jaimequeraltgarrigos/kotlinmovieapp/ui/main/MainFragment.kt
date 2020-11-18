@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.R
 import com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.adapter.MovieAdapter
+import com.example.jaimequeraltgarrigos.kotlinmovieapp.ui.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_fragment.*
